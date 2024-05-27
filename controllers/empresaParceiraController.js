@@ -70,5 +70,4 @@ class EmpresaParceiraController {
     }
 }
 
-
 module.exports = EmpresaParceiraController;

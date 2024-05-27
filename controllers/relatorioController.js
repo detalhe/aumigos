@@ -1,9 +1,7 @@
 const Database = require('../utils/database');
-const fs = require('fs');
 const excel = require('exceljs');
-const pdf = require('html-pdf');
-const ejs = require('ejs');
 const json2csv = require('json2csv').parse;
+const PdfPrinter = require('pdfmake');
 
 class RelatorioController {
     async exibirFormularioRelatorio(req, res) {
@@ -67,27 +65,50 @@ class RelatorioController {
     }
 
     async gerarRelatorioPDF(tipoRelatorio, dados, res) {
-        const html = await ejs.renderFile('views/relatorio/template.ejs', { tipoRelatorio, dados });
-
-        const options = {
-            format: 'A4',
-            border: {
-                top: '1cm',
-                right: '1cm',
-                bottom: '1cm',
-                left: '1cm'
+        const fonts = {
+            Helvetica: {
+                normal: 'Helvetica',
+                bold: 'Helvetica-Bold',
+                italics: 'Helvetica-Oblique',
+                bolditalics: 'Helvetica-BoldOblique'
             }
         };
 
-        pdf.create(html, options).toBuffer((err, buffer) => {
-            if (err) {
-                throw err;
-            }
+        const printer = new PdfPrinter(fonts);
 
-            res.setHeader('Content-Type', 'application/pdf');
-            res.setHeader('Content-Disposition', 'attachment; filename=relatorio.pdf');
-            res.send(buffer);
-        });
+        const content = [
+            { text: `Relatório de ${tipoRelatorio}`, style: 'header' },
+            {
+                table: {
+                    headerRows: 1,
+                    widths: Object.keys(dados[0]).map(() => '*'),
+                    body: [
+                        Object.keys(dados[0]),
+                        ...dados.map(item => Object.values(item))
+                    ]
+                }
+            }
+        ];
+
+        const docDefinition = {
+            content,
+            styles: {
+                header: {
+                    fontSize: 18,
+                    bold: true,
+                    margin: [0, 0, 0, 10]
+                }
+            },
+            defaultStyle: {
+                font: 'Helvetica'
+            }
+        };
+
+        const pdfDoc = printer.createPdfKitDocument(docDefinition);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=relatorio.pdf');
+        pdfDoc.pipe(res);
+        pdfDoc.end();
     }
 
     async gerarRelatorioExcel(tipoRelatorio, dados, res) {
