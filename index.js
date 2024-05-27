@@ -14,7 +14,8 @@ app.set("layout", "./layout");
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use(express.static("public"))
+app.set('views', `${__dirname}/views`);
+app.use(express.static(`${__dirname}/public`));
 app.use(expressEjsLayout);
 
 app.use("/", homeRoute);
