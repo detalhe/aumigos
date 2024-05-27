@@ -97,4 +97,50 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Distribuição de Animais por Tipo</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="animalPorTipoChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('animalPorTipoChart').getContext('2d');
+        var animalPorTipoData = <%- JSON.stringify(animalPorTipo) %>;
+
+        var chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: animalPorTipoData.map(item => item.tipo),
+                datasets: [{
+                    data: animalPorTipoData.map(item => item.count),
+                    backgroundColor: ['#f56954', '#00a65a', '#f39c12']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Distribuição de Animais por Tipo'
+                    }
+                }
+            }
+        });
+
+        console.log(animalPorTipoData);
+    });
+</script>
