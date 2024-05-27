@@ -1,0 +1,49 @@
+<div class="container">
+    <h1 class="my-4">Animais</h1>
+
+    <a href="/animais/cadastrar" class="btn btn-primary mb-3">Cadastrar Novo Animal</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Sexo</th>
+                <th>Porte</th>
+                <th>Temperamento</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% animais.forEach(function(animal) { %>
+                <tr>
+                    <td>
+                        <%= animal.nome %>
+                    </td>
+                    <td>
+                        <%= animal.tipo %>
+                    </td>
+                    <td>
+                        <%= animal.sexo %>
+                    </td>
+                    <td>
+                        <%= animal.porte %>
+                    </td>
+                    <td>
+                        <%= animal.temperamento %>
+                    </td>
+                    <td>
+                        <%= animal.status %>
+                    </td>
+                    <td>
+                        <a href="/animais/<%= animal.id %>/editar" class="btn btn-sm btn-primary">Editar</a>
+                        <form action="/animais/<%= animal.id %>/excluir" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,45 @@
+<div class="container">
+    <h1 class="my-4">Empresas Parceiras</h1>
+
+    <a href="/empresas-parceiras/cadastrar" class="btn btn-primary mb-3">Cadastrar Nova Empresa Parceira</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Website</th>
+                <th>Tipo de Parceria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% empresas.forEach(function(empresa) { %>
+                <tr>
+                    <td>
+                        <%= empresa.nome %>
+                    </td>
+                    <td>
+                        <%= empresa.email %>
+                    </td>
+                    <td>
+                        <%= empresa.telefone %>
+                    </td>
+                    <td>
+                        <%= empresa.website %>
+                    </td>
+                    <td>
+                        <%= empresa.tipo_parceria %>
+                    </td>
+                    <td>
+                        <a href="/empresas-parceiras/<%= empresa.id %>/editar" class="btn btn-sm btn-primary">Editar</a>
+                        <form action="/empresas-parceiras/<%= empresa.id %>/excluir" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</div>

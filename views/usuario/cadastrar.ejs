@@ -1,0 +1,43 @@
+<div class="container">
+    <h1 class="my-4">Cadastrar Usuário</h1>
+
+    <form action="/usuarios" method="POST">
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" id="nome" name="nome" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="senha" class="form-label">Senha:</label>
+            <input type="password" id="senha" name="senha" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo:</label>
+            <select id="tipo" name="tipo" class="form-select" required>
+                <option value="administrador">Administrador</option>
+                <option value="voluntario">Voluntário</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="cargo" class="form-label">Cargo:</label>
+            <input type="text" id="cargo" name="cargo" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Status:</label>
+            <select id="status" name="status" class="form-select" required>
+                <option value="ativo">Ativo</option>
+                <option value="inativo">Inativo</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>

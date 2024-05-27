@@ -1,0 +1,41 @@
+<div class="container">
+    <h1 class="my-4">Doadores</h1>
+
+    <a href="/doadores/cadastrar" class="btn btn-primary mb-3">Cadastrar Novo Doador</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Endereço</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% doadores.forEach(function(doador) { %>
+                <tr>
+                    <td>
+                        <%= doador.nome %>
+                    </td>
+                    <td>
+                        <%= doador.email %>
+                    </td>
+                    <td>
+                        <%= doador.telefone %>
+                    </td>
+                    <td>
+                        <%= doador.endereco %>
+                    </td>
+                    <td>
+                        <a href="/doadores/<%= doador.id %>/editar" class="btn btn-sm btn-primary">Editar</a>
+                        <form action="/doadores/<%= doador.id %>/excluir" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</div>

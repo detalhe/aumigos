@@ -1,0 +1,45 @@
+<div class="container">
+    <h1 class="my-4">Usuários</h1>
+
+    <a href="/usuarios/cadastrar" class="btn btn-primary mb-3">Cadastrar Novo Usuário</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Tipo</th>
+                <th>Cargo</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% usuarios.forEach(function(usuario) { %>
+                <tr>
+                    <td>
+                        <%= usuario.nome %>
+                    </td>
+                    <td>
+                        <%= usuario.email %>
+                    </td>
+                    <td>
+                        <%= usuario.tipo %>
+                    </td>
+                    <td>
+                        <%= usuario.cargo %>
+                    </td>
+                    <td>
+                        <%= usuario.status %>
+                    </td>
+                    <td>
+                        <a href="/usuarios/<%= usuario.id %>/editar" class="btn btn-sm btn-primary">Editar</a>
+                        <form action="/usuarios/<%= usuario.id %>/excluir" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</div>

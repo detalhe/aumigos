@@ -1,0 +1,42 @@
+<div class="container">
+    <h1 class="my-4">Editar Produto</h1>
+
+    <form action="/produtos/<%= produto.id %>/atualizar" method="POST">
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" id="nome" name="nome" class="form-control" value="<%= produto.nome %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="categoria" class="form-label">Categoria:</label>
+            <select id="categoria" name="categoria" class="form-select" required>
+                <option value="alimentos" <%=produto.categoria==='alimentos' ? 'selected' : '' %>>Alimentos</option>
+                <option value="higiene" <%=produto.categoria==='higiene' ? 'selected' : '' %>>Higiene</option>
+                <option value="limpeza" <%=produto.categoria==='limpeza' ? 'selected' : '' %>>Limpeza</option>
+                <option value="outros" <%=produto.categoria==='outros' ? 'selected' : '' %>>Outros</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="quantidade" class="form-label">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" class="form-control" value="<%= produto.quantidade %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="unidade_medida" class="form-label">Unidade de Medida:</label>
+            <select id="unidade_medida" name="unidade_medida" class="form-select" required>
+                <option value="unidades" <%=produto.unidade_medida==='unidades' ? 'selected' : '' %>>Unidades</option>
+                <option value="kg" <%=produto.unidade_medida==='kg' ? 'selected' : '' %>>Kg</option>
+                <option value="litros" <%=produto.unidade_medida==='litros' ? 'selected' : '' %>>Litros</option>
+                <option value="outros" <%=produto.unidade_medida==='outros' ? 'selected' : '' %>>Outros</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="data_validade" class="form-label">Data de Validade:</label>
+            <input type="date" id="data_validade" name="data_validade" class="form-control" value="<%= produto.data_validade.toISOString().slice(0, 10) %>" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+    </form>
+</div>

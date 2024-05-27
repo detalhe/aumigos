@@ -1,0 +1,58 @@
+<h1><strong>Dashboard</strong></h1>
+<p>
+    Data: <%= new Date().toLocaleDateString('pt-BR') %>
+</p>
+
+<div class="container-fluid" bis_skin_checked="1">
+
+    <div class="row" bis_skin_checked="1">
+        <div class="col-lg-4 col-6" bis_skin_checked="1">
+
+            <div class="small-box bg-warning" bis_skin_checked="1">
+                <div class="inner" bis_skin_checked="1">
+                    <h3>
+                        <%= totalAnimais %>
+                    </h3>
+                    <p>Animais Cadastrados</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-paw"></i>
+                </div>
+                <a href="/animais" class="small-box-footer">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-6" bis_skin_checked="1">
+
+            <div class="small-box bg-gradient-success" bis_skin_checked="1">
+                <div class="inner" bis_skin_checked="1">
+                    <h3>
+                        <%= totalEmpresasParceiras %>
+                    </h3>
+                    <p>Empresas Parceiras</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <a href="/empresas-parceiras" class="small-box-footer">More informações <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-6" bis_skin_checked="1">
+
+            <div class="small-box bg-danger" bis_skin_checked="1">
+                <div class="inner" bis_skin_checked="1">
+                    <h3>
+                        <%= totalVoluntarios %>
+                    </h3>
+                    <p>Voluntários</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <a href="/voluntarios" class="small-box-footer">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+</div>

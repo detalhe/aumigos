@@ -1,0 +1,45 @@
+<div class="container">
+    <h1 class="my-4">Produtos</h1>
+
+    <a href="/produtos/cadastrar" class="btn btn-primary mb-3">Cadastrar Novo Produto</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Quantidade</th>
+                <th>Unidade de Medida</th>
+                <th>Data de Validade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% produtos.forEach(function(produto) { %>
+                <tr>
+                    <td>
+                        <%= produto.nome %>
+                    </td>
+                    <td>
+                        <%= produto.categoria %>
+                    </td>
+                    <td>
+                        <%= produto.quantidade %>
+                    </td>
+                    <td>
+                        <%= produto.unidade_medida %>
+                    </td>
+                    <td>
+                        <%= new Date(produto.data_validade).toLocaleDateString('pt-BR') %>
+                    </td>
+                    <td>
+                        <a href="/produtos/<%= produto.id %>/editar" class="btn btn-sm btn-primary">Editar</a>
+                        <form action="/produtos/<%= produto.id %>/excluir" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</div>

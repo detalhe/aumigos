@@ -1,0 +1,62 @@
+<div class="container">
+    <h1 class="my-4">Cadastrar Animal</h1>
+
+    <form action="/animais" method="POST">
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" id="nome" name="nome" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo:</label>
+            <select id="tipo" name="tipo" class="form-select" required>
+                <option value="cachorro">Cachorro</option>
+                <option value="gato">Gato</option>
+                <option value="passaro">Pássaro</option>
+                <option value="outros">Outros</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="sexo" class="form-label">Sexo:</label>
+            <select id="sexo" name="sexo" class="form-select" required>
+                <option value="macho">Macho</option>
+                <option value="femea">Fêmea</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="porte" class="form-label">Porte:</label>
+            <select id="porte" name="porte" class="form-select" required>
+                <option value="pequeno">Pequeno</option>
+                <option value="medio">Médio</option>
+                <option value="grande">Grande</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="temperamento" class="form-label">Temperamento:</label>
+            <select id="temperamento" name="temperamento" class="form-select" required>
+                <option value="amigavel">Amigável</option>
+                <option value="reservado">Reservado</option>
+                <option value="agressivo">Agressivo</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Status:</label>
+            <select id="status" name="status" class="form-select" required>
+                <option value="disponivel">Disponível</option>
+                <option value="adotado">Adotado</option>
+                <option value="em-tratamento">Em Tratamento</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição:</label>
+            <textarea id="descricao" name="descricao" class="form-control" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
