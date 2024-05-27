@@ -1,0 +1,30 @@
+<!-- views/relatorio/formulario.ejs -->
+
+<div class="container">
+    <h1 class="my-4">Emitir Relatório</h1>
+
+    <form action="/relatorios" method="POST">
+        <div class="mb-3">
+            <label for="tipoRelatorio" class="form-label">Tipo de Relatório:</label>
+            <select id="tipoRelatorio" name="tipoRelatorio" class="form-select" required>
+                <option value="usuarios">Usuários</option>
+                <option value="doadores">Doadores</option>
+                <option value="empresas_parceiras">Empresas Parceiras</option>
+                <option value="produtos">Produtos</option>
+                <option value="animais">Animais</option>
+                <option value="saidas_eventos">Saídas de Eventos</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="formatoRelatorio" class="form-label">Formato do Relatório:</label>
+            <select id="formatoRelatorio" name="formatoRelatorio" class="form-select" required>
+                <option value="pdf">PDF</option>
+                <option value="excel">Excel</option>
+                <option value="csv">CSV</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Gerar Relatório</button>
+    </form>
+</div>

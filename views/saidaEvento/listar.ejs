@@ -1,0 +1,51 @@
+<!-- views/saidaEvento/listar.ejs -->
+
+<div class="container">
+    <h1 class="my-4">Saídas de Eventos</h1>
+
+    <a href="/saidas-eventos/cadastrar" class="btn btn-primary mb-3">Cadastrar Nova Saída de Evento</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Evento</th>
+                <th>Data de Saída</th>
+                <th>Hora de Saída</th>
+                <th>Responsável</th>
+                <th>Item</th>
+                <th>Quantidade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% saidasEventos.forEach(function(saidaEvento) { %>
+                <tr>
+                    <td>
+                        <%= saidaEvento.evento %>
+                    </td>
+                    <td>
+                        <%= new Date(saidaEvento.data_saida).toLocaleDateString('pt-BR', { day: '2-digit' , month: '2-digit' , year: 'numeric' }) %>
+                    </td>
+                    <td>
+                        <%= saidaEvento.hora_saida %>
+                    </td>
+                    <td>
+                        <%= saidaEvento.responsavel %>
+                    </td>
+                    <td>
+                        <%= saidaEvento.item %>
+                    </td>
+                    <td>
+                        <%= saidaEvento.quantidade %>
+                    </td>
+                    <td>
+                        <a href="/saidas-eventos/<%= saidaEvento.id %>/editar" class="btn btn-sm btn-primary">Editar</a>
+                        <form action="/saidas-eventos/<%= saidaEvento.id %>/excluir" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</div>

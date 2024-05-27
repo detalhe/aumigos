@@ -1,0 +1,39 @@
+<!-- views/saidaEvento/editar.ejs -->
+
+<div class="container">
+    <h1 class="my-4">Editar Saída de Evento</h1>
+
+    <form action="/saidas-eventos/<%= saidaEvento.id %>/atualizar" method="POST">
+        <div class="mb-3">
+            <label for="evento" class="form-label">Evento:</label>
+            <input type="text" id="evento" name="evento" class="form-control" value="<%= saidaEvento.evento %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="dataSaida" class="form-label">Data de Saída:</label>
+            <input type="date" id="dataSaida" name="dataSaida" class="form-control" value="<%= new Date(saidaEvento.data_saida).toISOString().slice(0, 10) %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="horaSaida" class="form-label">Hora de Saída:</label>
+            <input type="time" id="horaSaida" name="horaSaida" class="form-control" value="<%= saidaEvento.hora_saida %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="responsavel" class="form-label">Responsável:</label>
+            <input type="text" id="responsavel" name="responsavel" class="form-control" value="<%= saidaEvento.responsavel %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="item" class="form-label">Item:</label>
+            <input type="text" id="item" name="item" class="form-control" value="<%= saidaEvento.item %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="quantidade" class="form-label">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" class="form-control" value="<%= saidaEvento.quantidade %>" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+    </form>
+</div>

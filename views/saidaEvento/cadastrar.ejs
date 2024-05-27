@@ -1,0 +1,39 @@
+<!-- views/saidaEvento/cadastrar.ejs -->
+
+<div class="container">
+    <h1 class="my-4">Cadastrar Saída de Evento</h1>
+
+    <form action="/saidas-eventos" method="POST">
+        <div class="mb-3">
+            <label for="evento" class="form-label">Evento:</label>
+            <input type="text" id="evento" name="evento" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="dataSaida" class="form-label">Data de Saída:</label>
+            <input type="date" id="dataSaida" name="dataSaida" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="horaSaida" class="form-label">Hora de Saída:</label>
+            <input type="time" id="horaSaida" name="horaSaida" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="responsavel" class="form-label">Responsável:</label>
+            <input type="text" id="responsavel" name="responsavel" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="item" class="form-label">Item:</label>
+            <input type="text" id="item" name="item" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="quantidade" class="form-label">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
