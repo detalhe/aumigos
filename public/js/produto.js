@@ -6,7 +6,7 @@ async function cadastrarProduto(event) {
     const nome = document.getElementById('nome').value;
     const categoria = document.getElementById('categoria').value;
     const quantidade = document.getElementById('quantidade').value;
-    const unidadeMedida = document.getElementById('unidade_medida').value;
+    const unidadeMedida = document.getElementById('unidade_medida').value; // Corrigido
     const dataValidade = document.getElementById('data_validade').value;
 
     const response = await fetch('/produtos', {
@@ -32,7 +32,7 @@ async function atualizarProduto(event) {
     const categoria = document.getElementById('categoria').value;
     const quantidade = document.getElementById('quantidade').value;
     const unidadeMedida = document.getElementById('unidade_medida').value;
-    const dataValidade = document.getElementById('data_validade').value;
+    const dataValidade = document.getElementById('dataValidade').value;
 
     const response = await fetch(`/produtos/${id}/atualizar`, {
         method: 'POST',

@@ -26,6 +26,7 @@ class UsuarioController {
         try {
             const { nome, email, senha, tipo, cargo, status } = req.body;
             const usuario = new UsuarioModel(nome, email, senha, tipo, cargo, status);
+            console.log('Usuario cadastrado:', usuario);
             const db = new Database();
             await db.ExecutaComandoNonQuery('INSERT INTO usuarios (nome, email, senha, tipo, cargo, status) VALUES (?, ?, ?, ?, ?, ?)', [usuario.nome, usuario.email, usuario.senha, usuario.tipo, usuario.cargo, usuario.status]);
             res.redirect('/usuarios');
@@ -50,6 +51,7 @@ class UsuarioController {
             const id = req.params.id;
             const { nome, email, senha, tipo, cargo, status } = req.body;
             const usuario = new UsuarioModel(nome, email, senha, tipo, cargo, status);
+            console.log('Usuario atualizado:', usuario);
             const db = new Database();
             await db.ExecutaComandoNonQuery('UPDATE usuarios SET nome = ?, email = ?, senha = ?, tipo = ?, cargo = ?, status = ? WHERE id = ?', [usuario.nome, usuario.email, usuario.senha, usuario.tipo, usuario.cargo, usuario.status, id]);
             res.redirect('/usuarios');
@@ -66,6 +68,22 @@ class UsuarioController {
             res.redirect('/usuarios');
         } catch (error) {
             res.status(500).send("Erro ao excluir usuário: " + error.message);
+        }
+    }
+
+    async login(req, res) {
+        try {
+            const { email, senha } = req.body;
+            const db = new Database();
+            const usuarios = await db.ExecutaComando('SELECT * FROM usuarios WHERE email = ? AND senha = ? AND tipo = ?', [email, senha, 'administrador']);
+            if (usuarios.length > 0) {
+                req.session.user = usuarios[0];
+                res.redirect('/');
+            } else {
+                res.status(401).send("Email ou senha incorretos, ou você não tem permissão para acessar.");
+            }
+        } catch (error) {
+            res.status(500).send("Erro ao fazer login: " + error.message);
         }
     }
 }

@@ -1,62 +1,130 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Animal</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-primary {
+            background-color: #f5b942;
+            border-color: #f5b942;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffaa00;
+        }
+    </style>
+</head>
+
 <div class="container">
-    <h1 class="my-4">Editar Animal</h1>
-
-    <form action="/animais/<%= animal.id %>/atualizar" method="POST">
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome:</label>
-            <input type="text" id="nome" name="nome" class="form-control" value="<%= animal.nome %>" required>
+    <h1 class="mt-5 mb-4"><strong>Editar Animal</strong></h1>
+    <form id="editarAnimalForm" action="/animais/<%= animal.id %>/atualizar" method="POST" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" value="<%= animal.nome %>" required>
+            <div class="invalid-feedback">Por favor, insira o nome do animal.</div>
         </div>
-
-        <div class="mb-3">
-            <label for="tipo" class="form-label">Tipo:</label>
-            <select id="tipo" name="tipo" class="form-select" required>
+        <div class="form-group">
+            <label for="tipo">Tipo:</label>
+            <select id="tipo" name="tipo" class="form-control custom-select" required>
+                <option value="">Selecione o tipo</option>
                 <option value="cachorro" <%=animal.tipo==='cachorro' ? 'selected' : '' %>>Cachorro</option>
                 <option value="gato" <%=animal.tipo==='gato' ? 'selected' : '' %>>Gato</option>
                 <option value="passaro" <%=animal.tipo==='passaro' ? 'selected' : '' %>>Pássaro</option>
                 <option value="outros" <%=animal.tipo==='outros' ? 'selected' : '' %>>Outros</option>
             </select>
+            <div class="invalid-feedback">Por favor, selecione o tipo do animal.</div>
         </div>
-
-        <div class="mb-3">
-            <label for="sexo" class="form-label">Sexo:</label>
-            <select id="sexo" name="sexo" class="form-select" required>
+        <div class="form-group">
+            <label for="sexo">Sexo:</label>
+            <select id="sexo" name="sexo" class="form-control custom-select" required>
+                <option value="">Selecione o sexo</option>
                 <option value="macho" <%=animal.sexo==='macho' ? 'selected' : '' %>>Macho</option>
                 <option value="femea" <%=animal.sexo==='femea' ? 'selected' : '' %>>Fêmea</option>
             </select>
+            <div class="invalid-feedback">Por favor, selecione o sexo do animal.</div>
         </div>
-
-        <div class="mb-3">
-            <label for="porte" class="form-label">Porte:</label>
-            <select id="porte" name="porte" class="form-select" required>
+        <div class="form-group">
+            <label for="porte">Porte:</label>
+            <select id="porte" name="porte" class="form-control custom-select" required>
+                <option value="">Selecione o porte</option>
                 <option value="pequeno" <%=animal.porte==='pequeno' ? 'selected' : '' %>>Pequeno</option>
                 <option value="medio" <%=animal.porte==='medio' ? 'selected' : '' %>>Médio</option>
                 <option value="grande" <%=animal.porte==='grande' ? 'selected' : '' %>>Grande</option>
             </select>
+            <div class="invalid-feedback">Por favor, selecione o porte do animal.</div>
         </div>
-
-        <div class="mb-3">
-            <label for="temperamento" class="form-label">Temperamento:</label>
-            <select id="temperamento" name="temperamento" class="form-select" required>
+        <div class="form-group">
+            <label for="temperamento">Temperamento:</label>
+            <select id="temperamento" name="temperamento" class="form-control custom-select" required>
+                <option value="">Selecione o temperamento</option>
                 <option value="amigavel" <%=animal.temperamento==='amigavel' ? 'selected' : '' %>>Amigável</option>
                 <option value="reservado" <%=animal.temperamento==='reservado' ? 'selected' : '' %>>Reservado</option>
                 <option value="agressivo" <%=animal.temperamento==='agressivo' ? 'selected' : '' %>>Agressivo</option>
             </select>
+            <div class="invalid-feedback">Por favor, selecione o temperamento do animal.</div>
         </div>
-
-        <div class="mb-3">
-            <label for="status" class="form-label">Status:</label>
-            <select id="status" name="status" class="form-select" required>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" class="form-control custom-select" required>
+                <option value="">Selecione o status</option>
                 <option value="disponivel" <%=animal.status==='disponivel' ? 'selected' : '' %>>Disponível</option>
                 <option value="adotado" <%=animal.status==='adotado' ? 'selected' : '' %>>Adotado</option>
                 <option value="em-tratamento" <%=animal.status==='em-tratamento' ? 'selected' : '' %>>Em Tratamento</option>
             </select>
+            <div class="invalid-feedback">Por favor, selecione o status do animal.</div>
         </div>
-
-        <div class="mb-3">
-            <label for="descricao" class="form-label">Descrição:</label>
-            <textarea id="descricao" name="descricao" class="form-control" rows="4"><%= animal.descricao %></textarea>
+        <div class="form-group">
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" class="form-control" rows="4" required><%= animal.descricao %></textarea>
+            <div class="invalid-feedback">Por favor, insira uma descrição para o animal.</div>
         </div>
-
         <button type="submit" class="btn btn-primary">Atualizar</button>
     </form>
 </div>
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+    document.getElementById('editarAnimalForm').addEventListener('submit', function (event) {
+        var tipo = document.getElementById('tipo');
+        var sexo = document.getElementById('sexo');
+        var porte = document.getElementById('porte');
+        var temperamento = document.getElementById('temperamento');
+        var status = document.getElementById('status');
+
+        if (tipo.value === '' || sexo.value === '' || porte.value === '' || temperamento.value === '' || status.value === '') {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (tipo.value === '') {
+                tipo.classList.add('is-invalid');
+            }
+            if (sexo.value === '') {
+                sexo.classList.add('is-invalid');
+            }
+            if (porte.value === '') {
+                porte.classList.add('is-invalid');
+            }
+            if (temperamento.value === '') {
+                temperamento.classList.add('is-invalid');
+            }
+            if (status.value === '') {
+                status.classList.add('is-invalid');
+            }
+        }
+    });
+</script>

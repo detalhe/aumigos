@@ -1,27 +1,86 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Doador</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-primary {
+            background-color: #f5b942;
+            border-color: #f5b942;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffaa00;
+        }
+    </style>
+</head>
+
 <div class="container">
-    <h1 class="my-4">Editar Doador</h1>
-
-    <form action="/doadores/<%= doador.id %>/atualizar" method="POST">
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome:</label>
-            <input type="text" id="nome" name="nome" class="form-control" value="<%= doador.nome %>" required>
+    <h1 class="mt-5 mb-4">Editar Doador</h1>
+    <form id="editarDoadorForm" action="/doadores/<%= doador.id %>/atualizar" method="POST" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" value="<%= doador.nome %>" required>
+            <div class="invalid-feedback">Por favor, insira o nome do doador.</div>
         </div>
-
-        <div class="mb-3">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" id="email" name="email" class="form-control" value="<%= doador.email %>" required>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<%= doador.email %>" required>
+            <div class="invalid-feedback">Por favor, insira um email válido.</div>
         </div>
-
-        <div class="mb-3">
-            <label for="telefone" class="form-label">Telefone:</label>
-            <input type="tel" id="telefone" name="telefone" class="form-control" value="<%= doador.telefone %>" required>
+        <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Telefone" value="<%= doador.telefone %>" required>
+            <div class="invalid-feedback">Por favor, insira um número de telefone válido.</div>
         </div>
-
-        <div class="mb-3">
-            <label for="endereco" class="form-label">Endereço:</label>
-            <input type="text" id="endereco" name="endereco" class="form-control" value="<%= doador.endereco %>" required>
+        <div class="form-group">
+            <label for="endereco">Endereço:</label>
+            <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço" value="<%= doador.endereco %>" required>
+            <div class="invalid-feedback">Por favor, insira o endereço do doador.</div>
         </div>
-
         <button type="submit" class="btn btn-primary">Atualizar</button>
     </form>
 </div>
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+    document.getElementById('editarDoadorForm').addEventListener('submit', function (event) {
+        var nome = document.getElementById('nome');
+        var email = document.getElementById('email');
+        var telefone = document.getElementById('telefone');
+        var endereco = document.getElementById('endereco');
+
+        if (nome.value === '' || email.value === '' || telefone.value === '' || endereco.value === '') {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (nome.value === '') {
+                nome.classList.add('is-invalid');
+            }
+            if (email.value === '') {
+                email.classList.add('is-invalid');
+            }
+            if (telefone.value === '') {
+                telefone.classList.add('is-invalid');
+            }
+            if (endereco.value === '') {
+                endereco.classList.add('is-invalid');
+            }
+        }
+    });
+</script>

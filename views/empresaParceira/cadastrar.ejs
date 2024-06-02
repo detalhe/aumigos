@@ -1,37 +1,138 @@
-<div class="container">
-    <h1 class="my-4">Cadastrar Empresa Parceira</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-    <form action="/empresas-parceiras" method="POST">
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome:</label>
-            <input type="text" id="nome" name="nome" class="form-control" required>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Empresa Parceira</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-primary {
+            background-color: #f5b942;
+            border-color: #f5b942;
+        }
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" id="email" name="email" class="form-control" required>
-        </div>
+        .btn-primary:hover {
+            background-color: #ffaa00;
+        }
+    </style>
+</head>
 
-        <div class="mb-3">
-            <label for="telefone" class="form-label">Telefone:</label>
-            <input type="tel" id="telefone" name="telefone" class="form-control" required>
-        </div>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Cadastro de Empresa Parceira</h1>
+        <form id="cadastrarEmpresaParceiraForm" action="/empresas-parceiras" method="POST" class="needs-validation" novalidate>
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
+                <div class="invalid-feedback">Por favor, insira o nome da empresa parceira.</div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                <div class="invalid-feedback">Por favor, insira um email válido.</div>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Telefone" required>
+                <div class="invalid-feedback">Por favor, insira um número de telefone válido.</div>
+            </div>
+            <div class="form-group">
+                <label for="website">Website:</label>
+                <input type="url" class="form-control" id="website" name="website" placeholder="Website" required>
+                <div class="invalid-feedback">Por favor, insira um URL válido.</div>
+            </div>
+            <div class="form-group">
+                <label for="tipoParceria">Tipo de Parceria:</label>
+                <select id="tipoParceria" name="tipoParceria" class="form-control custom-select" required>
+                    <option value="">Selecione o tipo de parceria</option>
+                    <option value="patrocinio">Patrocínio</option>
+                    <option value="doacao">Doação</option>
+                    <option value="voluntariado">Voluntariado</option>
+                    <option value="outros">Outros</option>
+                </select>
+                <div class="invalid-feedback">Por favor, selecione o tipo de parceria.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
 
-        <div class="mb-3">
-            <label for="website" class="form-label">Website:</label>
-            <input type="url" id="website" name="website" class="form-control">
-        </div>
+    <script>
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
 
-        <div class="mb-3">
-            <label for="tipoParceria" class="form-label">Tipo de Parceria:</label>
-            <select id="tipoParceria" name="tipoParceria" class="form-select" required>
-                <option value="patrocinio">Patrocínio</option>
-                <option value="doacao">Doação</option>
-                <option value="voluntariado">Voluntariado</option>
-                <option value="outros">Outros</option>
-            </select>
-        </div>
+        document.getElementById('cadastrarEmpresaParceiraForm').addEventListener('submit', function (event) {
+            var nome = document.getElementById('nome');
+            var email = document.getElementById('email');
+            var telefone = document.getElementById('telefone');
+            var website = document.getElementById('website');
+            var tipoParceria = document.getElementById('tipoParceria');
 
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-    </form>
-</div>
+            var isValid = true;
+
+            if (nome.value === '') {
+                nome.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                nome.classList.remove('is-invalid');
+            }
+
+            if (email.value === '') {
+                email.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                email.classList.remove('is-invalid');
+            }
+
+            if (telefone.value === '') {
+                telefone.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                telefone.classList.remove('is-invalid');
+            }
+
+            if (website.value === '' || !isValidUrl(website.value)) {
+                website.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                website.classList.remove('is-invalid');
+            }
+
+            if (tipoParceria.value === '') {
+                tipoParceria.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                tipoParceria.classList.remove('is-invalid');
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });
+
+        function isValidUrl(url) {
+            try {
+                new URL(url);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -25,13 +25,9 @@ class ProdutoController {
     async cadastrar(req, res) {
         try {
             const { nome, categoria, quantidade, unidadeMedida, dataValidade } = req.body;
-            const dataParsed = new Date(dataValidade);
-            
-            if (isNaN(dataParsed.getTime())) {
-                throw new Error('Data de validade inválida');
-            }
-            
-            const produto = new ProdutoModel(nome, categoria, quantidade, unidadeMedida, dataParsed.toISOString().slice(0, 10));
+            const produto = new ProdutoModel(nome, categoria, quantidade, unidadeMedida, dataValidade);
+            console.log('Produto cadastrado:', produto);
+    
             const db = new Database();
             await db.ExecutaComandoNonQuery('INSERT INTO produtos (nome, categoria, quantidade, unidade_medida, data_validade) VALUES (?, ?, ?, ?, ?)', [produto.nome, produto.categoria, produto.quantidade, produto.unidadeMedida, produto.dataValidade]);
             res.redirect('/produtos');
@@ -39,7 +35,7 @@ class ProdutoController {
             res.status(500).send("Erro ao cadastrar produto: " + error.message);
         }
     }
-     
+    
 
     async editar(req, res) {
         try {
@@ -54,17 +50,12 @@ class ProdutoController {
 
     async atualizar(req, res) {
         try {
-            const id = req.params.id;
             const { nome, categoria, quantidade, unidadeMedida, dataValidade } = req.body;
-            const dataParsed = new Date(dataValidade);
-            
-            if (isNaN(dataParsed.getTime())) {
-                throw new Error('Data de validade inválida');
-            }
-            
-            const produto = new ProdutoModel(nome, categoria, quantidade, unidadeMedida, dataParsed.toISOString().slice(0, 10));
+            const produto = new ProdutoModel(nome, categoria, quantidade, unidadeMedida, dataValidade);
+            console.log('Produto atualizado:', produto);
+    
             const db = new Database();
-            await db.ExecutaComandoNonQuery('UPDATE produtos SET nome = ?, categoria = ?, quantidade = ?, unidade_medida = ?, data_validade = ? WHERE id = ?', [produto.nome, produto.categoria, produto.quantidade, produto.unidadeMedida, produto.dataValidade, id]);
+            await db.ExecutaComandoNonQuery('UPDATE produtos SET nome = ?, categoria = ?, quantidade = ?, unidade_medida = ?, data_validade = ? WHERE id = ?', [produto.nome, produto.categoria, produto.quantidade, produto.unidadeMedida, produto.dataValidade, req.params.id]);
             res.redirect('/produtos');
         } catch (error) {
             res.status(500).send("Erro ao atualizar produto: " + error.message);
@@ -72,7 +63,6 @@ class ProdutoController {
     }
     
     
-
     async excluir(req, res) {
         try {
             const id = req.params.id;

@@ -1,42 +1,135 @@
-<div class="container">
-    <h1 class="my-4">Cadastrar Produto</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-    <form action="/produtos" method="POST">
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome:</label>
-            <input type="text" id="nome" name="nome" class="form-control" required>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Produto</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-primary {
+            background-color: #f5b942;
+            border-color: #f5b942;
+        }
 
-        <div class="mb-3">
-            <label for="categoria" class="form-label">Categoria:</label>
-            <select id="categoria" name="categoria" class="form-select" required>
-                <option value="alimentos">Alimentos</option>
-                <option value="higiene">Higiene</option>
-                <option value="limpeza">Limpeza</option>
-                <option value="outros">Outros</option>
-            </select>
-        </div>
+        .btn-primary:hover {
+            background-color: #ffaa00;
+        }
+    </style>
+</head>
 
-        <div class="mb-3">
-            <label for="quantidade" class="form-label">Quantidade:</label>
-            <input type="number" id="quantidade" name="quantidade" class="form-control" required>
-        </div>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Cadastrar Produto</h1>
+        <form id="cadastrarProdutoForm" action="/produtos" method="POST" class="needs-validation" novalidate>
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
+                <div class="invalid-feedback">Por favor, insira o nome do produto.</div>
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoria:</label>
+                <select id="categoria" name="categoria" class="form-control custom-select" required>
+                    <option value="">Selecione a categoria</option>
+                    <option value="alimentos">Alimentos</option>
+                    <option value="higiene">Higiene</option>
+                    <option value="limpeza">Limpeza</option>
+                    <option value="outros">Outros</option>
+                </select>
+                <div class="invalid-feedback">Por favor, selecione a categoria do produto.</div>
+            </div>
+            <div class="form-group">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" class="form-control" id="quantidade" name="quantidade" placeholder="Quantidade" required>
+                <div class="invalid-feedback">Por favor, insira a quantidade do produto.</div>
+            </div>
+            <div class="form-group">
+                <label for="unidade_medida">Unidade de Medida:</label>
+                <select id="unidade_medida" name="unidadeMedida" class="form-control custom-select" required>
+                    <option value="">Selecione a unidade de medida</option>
+                    <option value="unidades">Unidades</option>
+                    <option value="kg">Kg</option>
+                    <option value="litros">Litros</option>
+                    <option value="outros">Outros</option>
+                </select>
+                <div class="invalid-feedback">Por favor, selecione a unidade de medida do produto.</div>
+            </div>
+            <div class="form-group">
+                <label for="dataValidade">Data de Validade:</label>
+                <input type="date" class="form-control" id="dataValidade" name="dataValidade" required>
+                <div class="invalid-feedback">Por favor, insira a data de validade do produto.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
 
-        <div class="mb-3">
-            <label for="unidade_medida" class="form-label">Unidade de Medida:</label>
-            <select id="unidade_medida" name="unidadeMedida" class="form-select" required>
-                <option value="unidades">Unidades</option>
-                <option value="kg">Kg</option>
-                <option value="litros">Litros</option>
-                <option value="outros">Outros</option>
-            </select>
-        </div>
+    <script>
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
 
-        <div class="mb-3">
-            <label for="data_validade" class="form-label">Data de Validade:</label>
-            <input type="date" id="data_validade" name="dataValidade" class="form-control" required>
-        </div>
+        document.getElementById('cadastrarProdutoForm').addEventListener('submit', function (event) {
+            var nome = document.getElementById('nome');
+            var categoria = document.getElementById('categoria');
+            var quantidade = document.getElementById('quantidade');
+            var unidade_medida = document.getElementById('unidade_medida');
+            var data_validade = document.getElementById('data_validade');
 
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-    </form>
-</div>
+            var isValid = true;
+
+            if (nome.value === '') {
+                nome.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                nome.classList.remove('is-invalid');
+            }
+
+            if (categoria.value === '') {
+                categoria.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                categoria.classList.remove('is-invalid');
+            }
+
+            if (quantidade.value === '') {
+                quantidade.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                quantidade.classList.remove('is-invalid');
+            }
+
+            if (unidade_medida.value === '') {
+                unidade_medida.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                unidade_medida.classList.remove('is-invalid');
+            }
+
+            if (data_validade.value === '') {
+                data_validade.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                data_validade.classList.remove('is-invalid');
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });
+    </script>
+</body>
+
+</html>

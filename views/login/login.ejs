@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ONG Aumigos</title>
+    <link rel="icon" type="image/x-icon" href="https://img.freepik.com/vetores-gratis/pata-de-design-de-logotipo-de-animal-de-estimacao-vetor-para-loja-de-animais_53876-136741.jpg">
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/css/adminlte.min.css">
+
+
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+        body {
+            font-family: 'SF Pro Display', sans-serif;
+            background-color: black;
+        }
+
+        .main-sidebar {
+            background-color: #222;
+        }
+
+        .nav-sidebar .nav-link {
+            color: #fff;
+        }
+
+        .nav-sidebar .nav-link.active {
+            background-color: #a87e28;
+        }
+
+        .btn-primary {
+            background-color: #f5b942;
+            border-color: #f5b942;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffaa00;
+            border-color: #ffaa00;
+        }
+
+        .btn-secondary {
+            background-color: #f5b942;
+            border-color: #f5b942;
+        }
+
+
+        .btn {
+            color: #fff;
+        }
+
+        .bt-css {
+            margin-right: 5px;
+        }
+
+        .bt-css:hover,
+        .btn-secondary:hover {
+            background-color: #dea535;
+            border-color: #dea535;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="../../index2.html"><strong>Aumigos | Admin</strong></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Faça login para iniciar</p>
+
+                <form id="loginForm">
+                    <div class="input-group mb-3">
+                        <input type="email" id="email" class="form-control" placeholder="Email" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" id="senha" class="form-control" placeholder="Senha" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, senha })
+            });
+
+            if (response.ok) {
+                window.location.href = '/';
+            } else {
+                alert('Erro de autenticação');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -11,9 +11,8 @@
                 <th>Evento</th>
                 <th>Data de Saída</th>
                 <th>Hora de Saída</th>
-                <th>Responsável</th>
-                <th>Item</th>
-                <th>Quantidade</th>
+                <th>Responsáveis</th>
+                <th>Produtos</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -30,13 +29,22 @@
                         <%= saidaEvento.hora_saida %>
                     </td>
                     <td>
-                        <%= saidaEvento.responsavel %>
+                        <% const responsaveis=responsaveisSaida.filter(r=> r.saida_evento_id === saidaEvento.id);
+                            responsaveis.forEach(function(responsavel, index) {
+                            const usuario = usuarios.find(u => u.id === responsavel.usuario_id);
+                            %>
+                            <%= usuario.nome %>
+                                <%= index < responsaveis.length - 1 ? ', ' : '' %>
+                                    <% }); %>
                     </td>
                     <td>
-                        <%= saidaEvento.item %>
-                    </td>
-                    <td>
-                        <%= saidaEvento.quantidade %>
+                        <% const produtos=produtosSaida.filter(p=> p.saida_evento_id === saidaEvento.id);
+                            produtos.forEach(function(produto, index) {
+                            const produtoInfo = produtosList.find(pr => pr.id === produto.produto_id);
+                            %>
+                            <%= produtoInfo.nome %> (<%= produto.quantidade %>
+                                    <%= produtoInfo.unidade_medida %>)<%= index < produtos.length - 1 ? ', ' : '' %>
+                                            <% }); %>
                     </td>
                     <td>
                         <a href="/saidas-eventos/<%= saidaEvento.id %>/editar" class="btn btn-sm btn-primary">Editar</a>

@@ -1,13 +1,10 @@
-// models/saidaEventoModel.js
-
 class SaidaEventoModel {
-    constructor(evento, dataSaida, horaSaida, responsavel, item, quantidade) {
+    constructor(evento, dataSaida, horaSaida, produtos, responsaveis) {
         this.evento = evento;
         this.dataSaida = dataSaida;
         this.horaSaida = horaSaida;
-        this.responsavel = responsavel;
-        this.item = item;
-        this.quantidade = quantidade;
+        this.produtos = Array.isArray(produtos) ? produtos : [];
+        this.responsaveis = responsaveis;
     }
 }
 

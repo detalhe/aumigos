@@ -18,6 +18,7 @@ class EmpresaParceiraController {
         try {
             const { nome, email, telefone, website, tipoParceria } = req.body;
             const empresa = new EmpresaParceiraModel(nome, email, telefone, website, tipoParceria);
+            console.log('Empresa parceira cadastrada:', empresa);
             const db = new Database();
             await db.ExecutaComandoNonQuery('INSERT INTO empresas_parceiras (nome, email, telefone, website, tipo_parceria) VALUES (?, ?, ?, ?, ?)', [empresa.nome, empresa.email, empresa.telefone, empresa.website, empresa.tipoParceria]);
             res.redirect('/empresas-parceiras');
@@ -42,6 +43,7 @@ class EmpresaParceiraController {
             const id = req.params.id;
             const { nome, email, telefone, website, tipoParceria } = req.body;
             const empresa = new EmpresaParceiraModel(nome, email, telefone, website, tipoParceria);
+            console.log('Empresa parceira atualizada:', empresa);
             const db = new Database();
             await db.ExecutaComandoNonQuery('UPDATE empresas_parceiras SET nome = ?, email = ?, telefone = ?, website = ?, tipo_parceria = ? WHERE id = ?', [empresa.nome, empresa.email, empresa.telefone, empresa.website, empresa.tipoParceria, id]);
             res.redirect('/empresas-parceiras');

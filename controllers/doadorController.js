@@ -26,6 +26,7 @@ class DoadorController {
         try {
             const { nome, email, telefone, endereco } = req.body;
             const doador = new DoadorModel(nome, email, telefone, endereco);
+            console.log('Doador cadastrado:', doador);
             const db = new Database();
             await db.ExecutaComandoNonQuery('INSERT INTO doadores (nome, email, telefone, endereco) VALUES (?, ?, ?, ?)', [doador.nome, doador.email, doador.telefone, doador.endereco]);
             res.redirect('/doadores');
@@ -50,6 +51,7 @@ class DoadorController {
             const id = req.params.id;
             const { nome, email, telefone, endereco } = req.body;
             const doador = new DoadorModel(nome, email, telefone, endereco);
+            console.log('Doador atualizado:', doador);
             const db = new Database();
             await db.ExecutaComandoNonQuery('UPDATE doadores SET nome = ?, email = ?, telefone = ?, endereco = ? WHERE id = ?', [doador.nome, doador.email, doador.telefone, doador.endereco, id]);
             res.redirect('/doadores');

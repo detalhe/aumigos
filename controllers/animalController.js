@@ -26,6 +26,7 @@ class AnimalController {
         try {
             const { nome, tipo, sexo, porte, temperamento, status, descricao } = req.body;
             const animal = new AnimalModel(nome, tipo, sexo, porte, temperamento, status, descricao);
+            console.log('Animal cadastrado:', animal);
             const db = new Database();
             await db.ExecutaComandoNonQuery('INSERT INTO animais (nome, tipo, sexo, porte, temperamento, status, descricao) VALUES (?, ?, ?, ?, ?, ?, ?)', [animal.nome, animal.tipo, animal.sexo, animal.porte, animal.temperamento, animal.status, animal.descricao]);
             res.redirect('/animais');
@@ -50,6 +51,7 @@ class AnimalController {
             const id = req.params.id;
             const { nome, tipo, sexo, porte, temperamento, status, descricao } = req.body;
             const animal = new AnimalModel(nome, tipo, sexo, porte, temperamento, status, descricao);
+            console.log('Animal atualizado:', animal);
             const db = new Database();
             await db.ExecutaComandoNonQuery('UPDATE animais SET nome = ?, tipo = ?, sexo = ?, porte = ?, temperamento = ?, status = ?, descricao = ? WHERE id = ?', [animal.nome, animal.tipo, animal.sexo, animal.porte, animal.temperamento, animal.status, animal.descricao, id]);
             res.redirect('/animais');

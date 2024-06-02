@@ -1,39 +1,148 @@
-<!-- views/saidaEvento/editar.ejs -->
+<!--views/saidaEvento/editar.ejs-->
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="container">
-    <h1 class="my-4">Editar Saída de Evento</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Saída de Evento</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-primary {
+            background-color: #f5b942;
+            border-color: #f5b942;
+        }
 
-    <form action="/saidas-eventos/<%= saidaEvento.id %>/atualizar" method="POST">
-        <div class="mb-3">
-            <label for="evento" class="form-label">Evento:</label>
-            <input type="text" id="evento" name="evento" class="form-control" value="<%= saidaEvento.evento %>" required>
+        .btn-primary:hover {
+            background-color: #ffaa00;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Editar Saída de Evento</h1>
+        <form id="editarSaidaEventoForm" action="/saidas-eventos/<%= saidaEvento.id %>/atualizar" method="POST" class="needs-validation" novalidate>
+            <div class="form-group">
+                <label for="evento">Evento:</label>
+                <input type="text" class="form-control" id="evento" name="evento" placeholder="Evento" value="<%= saidaEvento.evento %>" required>
+                <div class="invalid-feedback">Por favor, insira o evento.</div>
+            </div>
+            <div class="form-group">
+                <label for="dataSaida">Data de Saída:</label>
+                <input type="date" class="form-control" id="dataSaida" name="dataSaida" value="<%= new Date(saidaEvento.data_saida).toISOString().slice(0, 10) %>" required>
+                <div class="invalid-feedback">Por favor, insira a data de saída.</div>
+            </div>
+            <div class="form-group">
+                <label for="horaSaida">Hora de Saída:</label>
+                <input type="time" class="form-control" id="horaSaida" name="horaSaida" value="<%= saidaEvento.hora_saida %>" required>
+                <div class="invalid-feedback">Por favor, insira a hora de saída.</div>
+            </div>
+            <div class="form-group">
+                <label for="responsaveis">Responsáveis:</label>
+                <select multiple class="form-control" id="responsaveis" name="responsaveis[]" required>
+                    <% usuarios.forEach(function(usuario) { %>
+                        <option value="<%= usuario.id %>" <%=responsaveisSaida.some(r=> r.usuario_id === usuario.id) ? 'selected' : '' %>><%= usuario.nome %>
+                        </option>
+                        <% }); %>
+                </select>
+                <div class="invalid-feedback">Por favor, selecione pelo menos um responsável.</div>
+            </div>
+            <!-- <div class="form-group">
+  <label for="produtos">Produtos:</label>
+  <div id="produtos">
+    <% produtos.forEach(function(produto) { %>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="<%= produto.id %>" id="produto_<%= produto.id %>" name="produtos[<%= produto.id %>].produtoId" <%=produtosSaida.some(p=> p.produto_id == produto.id) ? 'checked' : '' %>>
+          <label class="form-check-label" for="produto_<%= produto.id %>">
+            <%= produto.nome %> (<%= produto.quantidade %>
+              <%= produto.unidade_medida %>)
+          </label>
+          <input type="number" class="form-control mt-2" id="quantidade_<%= produto.id %>" name="produtos[<%= produto.id %>].quantidade" placeholder="Quantidade" min="1" max="<%= produto.quantidade %>" value="<%= produtosSaida.find(p => p.produto_id == produto.id)?.quantidade || '' %>">
         </div>
+      <% }); %>
+    </div>
+    <div class="invalid-feedback">Por favor, selecione pelo menos um produto e sua quantidade.</div>
+  </div> -->
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        </form>
+    </div>
 
-        <div class="mb-3">
-            <label for="dataSaida" class="form-label">Data de Saída:</label>
-            <input type="date" id="dataSaida" name="dataSaida" class="form-control" value="<%= new Date(saidaEvento.data_saida).toISOString().slice(0, 10) %>" required>
-        </div>
+    <script>
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
 
-        <div class="mb-3">
-            <label for="horaSaida" class="form-label">Hora de Saída:</label>
-            <input type="time" id="horaSaida" name="horaSaida" class="form-control" value="<%= saidaEvento.hora_saida %>" required>
-        </div>
+        document.getElementById('editarSaidaEventoForm').addEventListener('submit', function (event) {
+            var evento = document.getElementById('evento');
+            var dataSaida = document.getElementById('dataSaida');
+            var horaSaida = document.getElementById('horaSaida');
+            var responsavel = document.getElementById('responsavel');
+            var item = document.getElementById('item');
+            var quantidade = document.getElementById('quantidade');
 
-        <div class="mb-3">
-            <label for="responsavel" class="form-label">Responsável:</label>
-            <input type="text" id="responsavel" name="responsavel" class="form-control" value="<%= saidaEvento.responsavel %>" required>
-        </div>
+            var isValid = true;
 
-        <div class="mb-3">
-            <label for="item" class="form-label">Item:</label>
-            <input type="text" id="item" name="item" class="form-control" value="<%= saidaEvento.item %>" required>
-        </div>
+            if (evento.value === '') {
+                evento.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                evento.classList.remove('is-invalid');
+            }
 
-        <div class="mb-3">
-            <label for="quantidade" class="form-label">Quantidade:</label>
-            <input type="number" id="quantidade" name="quantidade" class="form-control" value="<%= saidaEvento.quantidade %>" required>
-        </div>
+            if (dataSaida.value === '') {
+                dataSaida.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                dataSaida.classList.remove('is-invalid');
+            }
 
-        <button type="submit" class="btn btn-primary">Atualizar</button>
-    </form>
-</div>
+            if (horaSaida.value === '') {
+                horaSaida.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                horaSaida.classList.remove('is-invalid');
+            }
+
+            if (responsavel.value === '') {
+                responsavel.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                responsavel.classList.remove('is-invalid');
+            }
+
+            if (item.value === '') {
+                item.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                item.classList.remove('is-invalid');
+            }
+
+            if (quantidade.value === '') {
+                quantidade.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                quantidade.classList.remove('is-invalid');
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });
+    </script>
+</body>
+
+</html>
