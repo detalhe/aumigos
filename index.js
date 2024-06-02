@@ -1,6 +1,7 @@
 const express = require('express');
 const expressEjsLayout = require('express-ejs-layouts');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const homeRoute = require("./routes/homeRoute");
 const empresaParceiraRoute = require("./routes/empresaParceiraRoute");
 const usuarioRoute = require("./routes/usuarioRoute");
@@ -22,15 +23,22 @@ app.use(express.json());
 app.set('views', `${__dirname}/views`);
 app.use(express.static(`${__dirname}/public`));
 app.use(expressEjsLayout);
+app.use(cookieParser());
 
 app.use(session({
-    secret: 'your_secret_key',
-    resave: false,
-    saveUninitialized: true,
+  secret: 'your_secret_key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+      secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+      httpOnly: true,
+      sameSite: 'lax', // Adjust SameSite attribute
+      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
 }));
 
 app.use("/login", loginRoute);
-app.use(authMiddleware);
+app.use(authMiddleware); // Middleware de autenticação
 
 app.use("/", homeRoute);
 app.use("/empresas-parceiras", empresaParceiraRoute);
