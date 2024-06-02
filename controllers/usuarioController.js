@@ -71,21 +71,6 @@ class UsuarioController {
         }
     }
 
-    async login(req, res) {
-        try {
-            const { email, senha } = req.body;
-            const db = new Database();
-            const usuarios = await db.ExecutaComando('SELECT * FROM usuarios WHERE email = ? AND senha = ? AND tipo = ?', [email, senha, 'administrador']);
-            if (usuarios.length > 0) {
-                req.session.user = usuarios[0];
-                res.redirect('/');
-            } else {
-                res.status(401).send("Email ou senha incorretos, ou você não tem permissão para acessar.");
-            }
-        } catch (error) {
-            res.status(500).send("Erro ao fazer login: " + error.message);
-        }
-    }
 }
 
 module.exports = UsuarioController;
