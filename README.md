@@ -4,7 +4,7 @@ Welcome to the Aumigos NGO Admin System! This project is a powerful and user-fri
 
 ## Deployment 🚀
 
-The Aumigos NGO Admin System is deployed and accessible at [aumigos-pi.vercel.app](https://aumigos-pi.vercel.app). Feel free to visit the live application and explore its features!
+The Aumigos NGO Admin System is deployed and accessible at [aumigos-pi.vercel.app](https://aumigos-pi.vercel.app).
 
 ## About Aumigos 🌟
 
