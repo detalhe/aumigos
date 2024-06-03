@@ -85,7 +85,6 @@ class SaidaEventoController {
       
           await db.ExecutaComandoNonQuery('UPDATE saidas_eventos SET evento = ?, data_saida = ?, hora_saida = ? WHERE id = ?', [saidaEvento.evento, saidaEvento.dataSaida, saidaEvento.horaSaida, id]);
       
-          // Delete responsaveis_saidas_eventos records that are no longer associated with the saida-evento
           const responsaveisExistentes = await db.ExecutaComando('SELECT usuario_id FROM responsaveis_saidas_eventos WHERE saida_evento_id = ?', [id]);
           const responsaveisExistentesIds = responsaveisExistentes.map(r => r.usuario_id);
           const responsaveisRemovidos = responsaveisExistentesIds.filter(r => !saidaEvento.responsaveis.includes(r.toString()));
@@ -93,7 +92,6 @@ class SaidaEventoController {
             await db.ExecutaComandoNonQuery('DELETE FROM responsaveis_saidas_eventos WHERE saida_evento_id = ? AND usuario_id = ?', [id, responsavel]);
           }
       
-          // Insert new responsaveis_saidas_eventos records
           for (const responsavel of saidaEvento.responsaveis) {
             if (!responsaveisExistentesIds.includes(parseInt(responsavel))) {
               await db.ExecutaComandoNonQuery('INSERT INTO responsaveis_saidas_eventos (saida_evento_id, usuario_id) VALUES (?, ?)', [id, responsavel]);
