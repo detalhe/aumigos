@@ -74,9 +74,3 @@ We appreciate your support in making a difference in the lives of dogs and pets!
 ## License 📄
 
 This project is licensed under the [MIT License](LICENSE).
-
-## Contact 📧
-
-If you have any questions, suggestions, or would like to learn more about Aumigos NGO, please feel free to contact us at info@aumigos.org. We'd love to hear from you! 😊
-
-Let's work together to create a better world for our furry friends! 🐾✨
