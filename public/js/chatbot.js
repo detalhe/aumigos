@@ -1,6 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
     const sendButton = document.getElementById("sendButton");
     sendButton.addEventListener("click", sendMessage);
+
+    const chatbotButton = document.getElementById('chatbotButton');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const closeButton = document.getElementById('closeButton');
+
+    chatbotButton.addEventListener('click', function () {
+      chatbotWindow.style.display = chatbotWindow.style.display === 'none' ? 'block' : 'none';
+    });
+
+    closeButton.addEventListener('click', function () {
+      chatbotWindow.style.display = 'none';
+    });
+
+    addPlaceholderMessage(); // Adiciona a mensagem de padrão
 });
 
 async function sendMessage() {
@@ -73,9 +87,10 @@ function addPlaceholderMessage() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const sendButton = document.getElementById("sendButton");
-    sendButton.addEventListener("click", sendMessage);
-
-    addPlaceholderMessage(); // Adiciona a mensagem de padrão
+const messageInput = document.getElementById("messageInput");
+messageInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        sendMessage();
+    }
 });
