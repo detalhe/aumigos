@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("Chatbot script loaded");
+
     const sendButton = document.getElementById("sendButton");
     sendButton.addEventListener("click", sendMessage);
 
@@ -7,11 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeButton = document.getElementById('closeButton');
 
     chatbotButton.addEventListener('click', function () {
-      chatbotWindow.style.display = chatbotWindow.style.display === 'none' ? 'block' : 'none';
+        console.log("Chatbot button clicked");
+        chatbotWindow.style.display = chatbotWindow.style.display === 'none' ? 'block' : 'none';
+        console.log("Chatbot window display:", chatbotWindow.style.display);
     });
 
     closeButton.addEventListener('click', function () {
-      chatbotWindow.style.display = 'none';
+        console.log("Close button clicked");
+        chatbotWindow.style.display = 'none';
     });
 
     addPlaceholderMessage(); // Adiciona a mensagem de padrão
