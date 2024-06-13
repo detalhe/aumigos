@@ -1,5 +1,3 @@
-// public/js/produto.js
-
 async function cadastrarProduto(event) {
     event.preventDefault();
 

@@ -1,5 +1,3 @@
-// routes/empresaParceiraRoute.js
-
 const express = require('express');
 const router = express.Router();
 const EmpresaParceiraController = require('../controllers/empresaParceiraController');

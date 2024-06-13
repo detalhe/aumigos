@@ -1,5 +1,3 @@
-// models/animalModel.js
-
 class AnimalModel {
     constructor(nome, tipo, sexo, porte, temperamento, status, descricao) {
         this.nome = nome;

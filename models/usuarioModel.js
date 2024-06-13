@@ -1,5 +1,3 @@
-// models/usuarioModel.js
-
 class UsuarioModel {
     constructor(nome, email, senha, tipo, cargo, status) {
         this.nome = nome;

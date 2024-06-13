@@ -1,5 +1,3 @@
-// controllers/animalController.js
-
 const Database = require('../utils/database');
 const AnimalModel = require('../models/animalModel');
 

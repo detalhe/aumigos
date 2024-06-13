@@ -1,5 +1,3 @@
-// public/js/animal.js
-
 async function cadastrarAnimal(event) {
     event.preventDefault();
 

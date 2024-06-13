@@ -1,4 +1,3 @@
-//controllers/saidaEventoController.js
 const Database = require('../utils/database');
 const SaidaEventoModel = require('../models/saidaEventoModel');
 

@@ -1,5 +1,3 @@
-// controllers/produtoController.js
-
 const Database = require('../utils/database');
 const ProdutoModel = require('../models/produtoModel');
 

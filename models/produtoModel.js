@@ -1,5 +1,3 @@
-// models/produtoModel.js
-
 class ProdutoModel {
     constructor(nome, categoria, quantidade, unidadeMedida, dataValidade) {
         this.nome = nome;

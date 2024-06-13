@@ -1,5 +1,3 @@
-// controllers/usuarioController.js
-
 const Database = require('../utils/database');
 const UsuarioModel = require('../models/usuarioModel');
 

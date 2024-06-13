@@ -1,5 +1,3 @@
-// models/empresaParceiraModel.js
-
 class EmpresaParceiraModel {
     constructor(nome, email, telefone, website, tipoParceria) {
         this.nome = nome;

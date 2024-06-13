@@ -1,5 +1,3 @@
-// controllers/doadorController.js
-
 const Database = require('../utils/database');
 const DoadorModel = require('../models/doadorModel');
 

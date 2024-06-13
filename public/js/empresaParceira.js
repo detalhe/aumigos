@@ -1,5 +1,3 @@
-// public/js/empresaParceira.js
-
 async function cadastrarEmpresaParceira(event) {
     event.preventDefault();
 

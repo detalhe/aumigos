@@ -1,5 +1,3 @@
-// public/js/usuario.js
-
 async function cadastrarUsuario(event) {
     event.preventDefault();
 

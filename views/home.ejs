@@ -99,12 +99,22 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
+            <div class="card card-danger" bis_skin_checked="1">
+                <div class="card-header" bis_skin_checked="1">
                     <h3 class="card-title">Distribuição de Animais por Tipo</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body" bis_skin_checked="1">
                     <canvas id="animalPorTipoChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card card-primary" bis_skin_checked="1">
+                <div class="card-header" bis_skin_checked="1">
+                    <h3 class="card-title">Distribuição de Animais por Porte</h3>
+                </div>
+                <div class="card-body" bis_skin_checked="1">
+                    <canvas id="animalPorPorteChart"></canvas>
                 </div>
             </div>
         </div>
@@ -115,10 +125,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var ctx = document.getElementById('animalPorTipoChart').getContext('2d');
+        var ctxTipo = document.getElementById('animalPorTipoChart').getContext('2d');
         var animalPorTipoData = <%- JSON.stringify(animalPorTipo) %>;
 
-        var chart = new Chart(ctx, {
+        var chartTipo = new Chart(ctxTipo, {
             type: 'pie',
             data: {
                 labels: animalPorTipoData.map(item => item.tipo),
@@ -141,6 +151,38 @@
             }
         });
 
+        var ctxPorte = document.getElementById('animalPorPorteChart').getContext('2d');
+        var animalPorPorteData = <%- JSON.stringify(animalPorPorte) %>;
+
+        var chartPorte = new Chart(ctxPorte, {
+            type: 'bar',
+            data: {
+                labels: animalPorPorteData.map(item => item.porte),
+                datasets: [{
+                    data: animalPorPorteData.map(item => item.count),
+                    backgroundColor: '#007bff'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: true,
+                        text: 'Distribuição de Animais por Porte'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
         console.log(animalPorTipoData);
+        console.log(animalPorPorteData);
     });
 </script>

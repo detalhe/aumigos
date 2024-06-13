@@ -1,5 +1,3 @@
-// controllers/empresaParceiraController.js
-
 const Database = require('../utils/database');
 const EmpresaParceiraModel = require('../models/empresaParceiraModel');
 

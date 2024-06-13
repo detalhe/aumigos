@@ -1,5 +1,3 @@
-// public/js/saidaEvento.js
-
 async function cadastrarSaidaEvento(event) {
     event.preventDefault();
 

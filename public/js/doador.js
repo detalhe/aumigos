@@ -1,5 +1,3 @@
-// public/js/doador.js
-
 async function cadastrarDoador(event) {
     event.preventDefault();
 

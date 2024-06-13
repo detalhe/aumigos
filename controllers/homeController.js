@@ -21,6 +21,12 @@ class HomeController {
                 GROUP BY tipo
             `);
 
+            const animalPorPorte = await db.ExecutaComando(`
+                SELECT porte, COUNT(*) as count 
+                FROM animais
+                GROUP BY porte
+            `);
+
             res.render('home', {
                 usuariosCount: usuariosCount[0].count,
                 animaisCount: animaisCount[0].count,
@@ -28,7 +34,8 @@ class HomeController {
                 doadoresCount: doadoresCount[0].count,
                 produtosCount: produtosCount[0].count,
                 saidasEventosCount: saidasEventosCount[0].count,
-                animalPorTipo: animalPorTipo
+                animalPorTipo: animalPorTipo,
+                animalPorPorte: animalPorPorte
             });
         } catch (error) {
             res.status(500).send("Erro ao carregar página inicial: " + error.message);
